@@ -56,5 +56,26 @@ class TestGetColumnIndex(unittest.TestCase):
         self.assertIsNone(fire_gdp.get_column_index([], 'Country'))
 
 
+class TestGetFireGdpYearData(unittest.TestCase):
+
+    def test_matches_years_and_skips_missing(self):
+        # 2001 has no fire value, 2003 no GDP value, 2004 is not a GDP year
+        data = fire_gdp.get_fire_gdp_year_data(CO2_FILE, GDP_FILE, 'Brazil')
+        self.assertEqual(data, [[2000, 100.5, 1000.0],
+                                [2002, 102.5, 1200.0]])
+
+    def test_types(self):
+        year, fires, gdp = fire_gdp.get_fire_gdp_year_data(
+            CO2_FILE, GDP_FILE, 'Brazil')[0]
+        self.assertIsInstance(year, int)
+        self.assertIsInstance(fires, float)
+        self.assertIsInstance(gdp, float)
+
+    def test_country_not_in_gdp(self):
+        data = fire_gdp.get_fire_gdp_year_data(
+            CO2_FILE, GDP_FILE, 'China, Hong Kong SAR')
+        self.assertEqual(data, [])
+
+
 if __name__ == '__main__':
     unittest.main()
