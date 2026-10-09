@@ -1,1 +1,3 @@
-data/
+/data/
+ssshtest
+__pycache__/
