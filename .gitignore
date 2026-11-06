@@ -1,3 +1,4 @@
 /data/
 ssshtest
 __pycache__/
+.snakemake/
