@@ -1,7 +1,9 @@
 name: swe4s
 channels:
   - conda-forge
+  - bioconda
 dependencies:
   - python>=3.10
   - matplotlib
   - pycodestyle
+  - snakemake-minimal
